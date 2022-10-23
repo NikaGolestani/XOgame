@@ -4,53 +4,34 @@ table = [
     [7 ,8 , 9]
 ]
 i=0
-def checkx():
+def check(y):
     global i
-    place=int (input("type the best place for X:"))
-    if place<4:
+    place=int (input(f"type the best place for {y}:"))
+    if  place<1:
+        print("invalid value")
+        i-=1
+    elif place<4:
         if table[0][place-1] != "X" and table[0][place-1]!="O" :
-            table[0][place-1] = "X"
+            table[0][place-1] = y
         else:
             print("Selected Place is Full!")
             i-=1
     elif place<7:
         if table[1][place-4] != "X" and table[1][place-4]!="O" :
-            table[1][place-4] = "X"
+            table[1][place-4] = y
         else:
             print("Selected Place is Full!")
             i -=1
     elif place<10:
         if table[2][place-7] != "X" and table[2][place-7]!="O":
-            table[2][place-7] = "X"
+            table[2][place-7] = y
         else:
             print("Selected Place is Full!")
             i -=1
     else:
-        print("unvaliable value")
+        print("invalid value")
+        i-=1
 
-def checko():
-    global i
-    place=int (input("type the best place for O:"))
-    if place<4:
-        if table[0][place-1] != "O" and table[0][place-1]!="X" :
-            table[0][place-1] = "O"
-        else:
-            print("Selected Place is Full!")
-            i -=1
-    elif place<7:
-        if table[1][place-4] != "O" and table[1][place-4]!="X" :
-            table[1][place-4] = "O"
-        else:
-            print("Selected Place is Full!")
-            i -=1
-    elif place<10:
-        if table[2][place-7] != "O" and table[2][place-7]!="X" :
-            table[2][place-7] = "O"
-        else:
-            print("Selected Place is Full!")
-            i -=1
-    else:
-        print("unvaliable value")
 
 def checkwinner(value):
     for i in table:
@@ -74,16 +55,13 @@ def printtable():
     print (f"{table[2][0]}|{table[2][1]}|{table[2][2]}")
 printtable()
 while i<9:
-    x=i%2
-    if x==0:
-        checkx()
-    else:
-        checko()
-    printtable()
-    if x==0:
+    if i%2==0:
         y = "X"
     else:
         y="O"
+    x=i%2
+    check(y)
+    printtable()
     if checkwinner(y)==True:
         print(f"{y} is the WINNER")
         break
